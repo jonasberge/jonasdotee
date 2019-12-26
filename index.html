@@ -1,2 +1,55 @@
-This Domain is for sale. Contact: check back later.
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
 
+<form id="contact-form" action="submit" method="post">
+	<input type="text" name="message">
+	<input type="submit">
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"
+	integrity="sha256-7uoevSMGGHaM9JT1c9+XCpW+ECg1f7KnPL/JNpDjSRI="
+	crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+const contactForm = document.getElementById('contact-form');
+contactForm.onsubmit = function () { submit(this); return false; };
+
+function submit(form)
+{
+	const data = new FormData(form);
+	data.append("_x", hash(serialize(data)));
+
+	const request = new XMLHttpRequest();
+	request.open("POST", form.action);
+	request.send(data);
+
+	request.onload = function () {
+		alert(request.responseText);
+	}
+}
+
+function serialize(formData)
+{
+	const result = {};
+
+	for (const pair of formData.entries()) {
+		const key = pair[0];
+		result[key] = pair[1];
+	}
+
+	return result;
+}
+
+function hash(data)
+{
+	return sha1(JSON.stringify(data));
+}
+
+</script>
+
+</body>
+</html>
