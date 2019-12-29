@@ -1,3 +1,6 @@
+# Cache files
+.jekyll-cache
+
 # --- https://www.gitignore.io/api/webstorm
 
 # Created by https://www.gitignore.io/api/webstorm
