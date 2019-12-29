@@ -1,5 +1,9 @@
-# Cache files
+_site
+.sass-cache
+.jekyll-metadata
+
 .jekyll-cache
+Gemfile.lock
 
 # --- https://www.gitignore.io/api/webstorm
 
