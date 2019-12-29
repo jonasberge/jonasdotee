@@ -1,7 +1,17 @@
+# ESLint-specific files
+node_modules/
+package.json
+.eslintrc.json
+yarn-error.log
+yarn.lock
+
+# Editor files
+.vscode/
+
+# Jekyll files
 _site/
 .sass-cache
 .jekyll-metadata
-
 .jekyll-cache
 Gemfile.lock
 
