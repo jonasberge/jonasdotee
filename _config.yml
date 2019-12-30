@@ -5,7 +5,6 @@ branch: master
 github: [metadata]
 
 # Site
-source: source
 url: https://jonas.ee
 baseurl: /
 
@@ -14,3 +13,9 @@ email: jonasdotee@gmail.com
 description: >-
   <description>
 lang: en-US
+
+exclude:
+  - node_modules/
+  - LICENSE.txt
+  - package.json
+  - yarn.lock
