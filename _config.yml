@@ -8,14 +8,27 @@ github: [metadata]
 url: https://jonas.ee
 baseurl: /
 
-# Page variables
+# Page
 email: jonasdotee@gmail.com
 description: >-
   <description>
 lang: en-US
+submit_action:
+  development: server/submit
+  production: https://jonasdotee.000webhostapp.com/submit
+
+plugins:
+  - jekyll-include-cache
 
 exclude:
-  - node_modules/
   - LICENSE.txt
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
   - package.json
   - yarn.lock
+  - server
+
+include:
+  - .htaccess
