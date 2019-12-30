@@ -1,14 +1,10 @@
-# GitHub
+# Repository information
 username: vonas
 repo: https://github.com/vonas/jonasdotee.git
 branch: master
 github: [metadata]
 
-# Site
-url: https://jonas.ee
-baseurl: /
-
-# Page
+# Data used in pages
 email: jonasdotee@gmail.com
 description: >-
   <description>
@@ -17,9 +13,14 @@ submit_action:
   development: server/submit
   production: https://jonasdotee.000webhostapp.com/submit
 
+# Jekyll configuration
+url: https://jonas.ee
+baseurl: /
+source: source
 plugins:
   - jekyll-include-cache
-
+include:
+  - .htaccess
 exclude:
   - LICENSE.txt
   - CNAME
@@ -29,6 +30,3 @@ exclude:
   - package.json
   - yarn.lock
   - server
-
-include:
-  - .htaccess
