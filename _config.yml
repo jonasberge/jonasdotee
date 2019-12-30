@@ -1,13 +1,15 @@
+# GitHub
 username: vonas
 repo: https://github.com/vonas/jonasdotee.git
 branch: master
 github: [metadata]
 
+# Site
 source: source
-
 url: https://jonas.ee
 baseurl: /
 
+# Page variables
 email: jonasdotee@gmail.com
 description: >-
   <description>
