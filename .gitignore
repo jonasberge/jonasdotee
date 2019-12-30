@@ -9,7 +9,6 @@ yarn.lock
 .vscode/
 
 # Jekyll files
-_site/
 .sass-cache
 .jekyll-metadata
 .jekyll-cache
