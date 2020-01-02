@@ -1,3 +1,12 @@
 #!/usr/bin/bash
 
-eval $(egrep -v '^#' .env | xargs) "$@"
+case "$1 $2" in
+  "bundle exec") shift; shift;;
+  "bundler exec") shift; shift;;
+esac
+
+if [[ "$1" = "jekyll" && ("$2" = "build" || "$2" = "serve") ]]; then
+  args="--incremental --config \"_config.yml,_config_dev.yml\""
+fi
+
+eval $(egrep -v '^#' .env | xargs) exec bundle exec $@ $args
