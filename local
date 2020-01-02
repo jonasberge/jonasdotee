@@ -31,7 +31,7 @@ done
 
 if [ $# -eq 0 ]; then
   s="    "
-  echo "local: ./local [command [arguments ...]] [redirection ...]"
+  echo "local: ./local [options ...] [command [arguments ...]] [redirection ...]"
   echo "$s""Execute COMMAND with $file using Jekyll instead of GitHub Pages."
   echo ""
   echo "  Options:"
