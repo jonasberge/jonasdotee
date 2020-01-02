@@ -8,7 +8,7 @@ scripts:
   - "js/main.js"
 ---
 
-<form method="post" action="{{ site.submit_action }}">
+<form id="offer-form" method="post" action="{{ site.submit_action }}">
   <fieldset>
     <legend>
       <b style="color: #444">jonas.ee</b>&ensp;Make an offer
@@ -58,72 +58,44 @@ scripts:
       </div>
       <div>
         <input type="submit" value="Submit">
+        <!-- <button onclick="submit">Submit</button> -->
       </div>
     </div>
   </fieldset>
 </form>
 
-<!--
-<form action="submit" method="post"
-	id="contact-form" class="pure-form pure-form-stacked">
-    <fieldset>
-        <legend><b style="color: #444">jonas.ee</b>&ensp;Make an offer</legend>
+<script>
 
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-1">
-                <label for="email">E-Mail Address<span style="color: grey">&ensp;&mdash;&ensp;so we can contact you</span></label>
-                <input id="email" name="email" type="email"
-                	spellcheck="false" class="pure-u-1" required>
-            </div>
+const form = document.querySelector('#offer-form');
 
-            <div class="pure-u-1-3 pure-u-md-1-3">
-                <label for="offer">Amount</label>
-                <input id="offer" name="offer" type="text" spellcheck="false"
-                	class="pure-u-7-8 pure-u-md-7-8" required>
-            </div>
+form.onsubmit = function () {
+  return submit();
+};
 
-            <div class="pure-u-2-3 pure-u-md-2-3">
-                <label for="currency">Currency</label>
-				<select id="currency" name="currency" class="pure-input-1 pending" required>
-                    <option style="display: none" disabled="disabled" selected="selected" value="">Loading...</option>
-					<option value="US Dollar;USD;840">US Dollar (USD)</option>
-					<option value="Euro;EUR;978">Euro (EUR)</option>
-					<option value="Australian Dollar;AUD;036">Australian Dollar (AUD)</option>
-					<option value="Indian Rupee;INR;356">Indian Rupee (INR)</option>
-					<option value="Norwegian Krone;NOK;578">Norwegian Krone (NOK)</option>
-					<option value="Brazilian Real;BRL;986">Brazilian Real (BRL)</option>
-					<option value="Canadian Dollar;CAD;124">Canadian Dollar (CAD)</option>
-					<option value="Yuan Renminbi;CNY;156">Yuan Renminbi (CNY)</option>
-					<option value="New Zealand Dollar;NZD;554">New Zealand Dollar (NZD)</option>
-					<option value="Danish Krone;DKK;208">Danish Krone (DKK)</option>
-					<option value="Pound Sterling;GBP;826">Pound Sterling (GBP)</option>
-					<option value="Hong Kong Dollar;HKD;344">Hong Kong Dollar (HKD)</option>
-					<option value="Yen;JPY;392">Yen (JPY)</option>
-					<option value="Won;KRW;410">Won (KRW)</option>
-					<option value="Rand;ZAR;710">Rand (ZAR)</option>
-					<option value="Swiss Franc;CHF;756">Swiss Franc (CHF)</option>
-					<option value="Malaysian Ringgit;MYR;458">Malaysian Ringgit (MYR)</option>
-					<option value="Mexican Peso;MXN;484">Mexican Peso (MXN)</option>
-					<option value="Zloty;PLN;985">Zloty (PLN)</option>
-					<option value="Russian Ruble;RUB;643">Russian Ruble (RUB)</option>
-					<option value="Singapore Dollar;SGD;702">Singapore Dollar (SGD)</option>
-					<option value="Swedish Krona;SEK;752">Swedish Krona (SEK)</option>
-					<option value="New Taiwan Dollar;TWD;901">New Taiwan Dollar (TWD)</option>
-					<option value="Baht;THB;764">Baht (THB)</option>
-					<option value="Turkish Lira;TRY;949">Turkish Lira (TRY)</option>
-				</select>
-            </div>
-        </div>
+function submit()
+{
+	const data = new FormData(form);
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", form.action);
+	xhr.send(data);
 
-        <div class="wrap">
-	        <div class="thing">
-			    <input id="legal" name="legal" type="checkbox" required>
-			    <label for="legal">I have read and agreed to the terms and conditions of this nice website. </label>
-			</div>
-		</div>
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState !== XMLHttpRequest.DONE)
+			return;
 
+		if (xhr.status === 200) {
+			console.log(xhr.responseText);
+			return;
+		}
 
-        <input style="display: block; margin: 0 auto; margin-top: 1em"  type="submit" value="Submit" class="pure-button pure-button-primary">
-    </fieldset>
-</form>
--->
+    console.log("failed");
+		switch (xhr.status) {
+			case 400: break;
+			default: break;
+		}
+  };
+
+  return false;
+}
+
+</script>
