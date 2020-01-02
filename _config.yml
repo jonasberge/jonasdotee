@@ -9,9 +9,7 @@ email: jonasdotee@gmail.com
 description: >-
   <description>
 lang: en-US
-submit_action:
-  development: server/submit
-  production: https://jonasdotee.000webhostapp.com/submit
+submit_action: https://jonas.ee/submit
 
 # Jekyll configuration
 url: https://jonas.ee
