@@ -1,0 +1,117 @@
+#!/usr/bin/bash
+
+file="Gemfile"
+jekyll="#\?jekyll"
+github_pages="#\?github-pages"
+revert_trigger="Generating..."
+
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    -j|--jekyll)
+      jekyll="$2"
+      shift
+      shift
+      ;;
+    -g|--github-pages)
+      github_pages="$2"
+      shift
+      shift
+      ;;
+    -r|-t|--revert-trigger)
+      revert_trigger="$2"
+      shift
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ $# -eq 0 ]; then
+  s="    "
+  echo "local: ./local [command [arguments ...]] [redirection ...]"
+  echo "$s""Execute COMMAND with $file using Jekyll instead of GitHub Pages."
+  echo ""
+  echo "  Options:"
+  echo "$s""-j --jekyll regexp"
+  echo "$s$s""Uses the regular expression REGEXP to find the line that"
+  echo "$s$s""is responsible for installing the \"jekyll\" ruby gem"
+  echo "$s""-g --github-pages regexp"
+  echo "$s$s""Same as above, but for locating the \"github-pages\" ruby gem"
+  echo "$s""-r -t --revert-trigger"
+  echo "$s$s""When this exact text is found in the ouput of the passed COMMAND"
+  echo "$s$s""the changes in '$file' are reverted. If this is not the case,"
+  echo "$s$s""changes will be reverted once the program terminates or is killed"
+  exit 1
+fi
+
+if [[ ("$1" = "bundle" || "$1" = "bundler") && ("$2" = "exec") ]]; then
+  shift
+  shift
+fi
+
+uncomment() {
+  regexp="s/^([\t ]*)[#\t ]*(.*$1.*)$/\1\2/1"
+  sed -i -r -e "$regexp" "$file"
+}
+
+comment() {
+  regexp="s/^([\t ]*)[#\t ]*(.*$1.*)$/\1# \2/1"
+  sed -i -r -e "$regexp" "$file"
+}
+
+repeat() {
+  printf "$1"'%.0s' $(seq 1 $2);
+}
+
+print_message() {
+  repeat ' ' $(( $length - ${#prefix} ))
+  echo -e "\e[7m$prefix$separator\e[0m" "$1"
+}
+
+make_changes() {
+  print_message "$update_message"
+  uncomment $jekyll
+  comment $github_pages
+}
+
+revert_changes() {
+  print_message "$revert_message"
+  comment $jekyll
+  uncomment $github_pages
+}
+
+prefix="./local"
+separator=":"
+length=18
+
+formatted_file="\e[1m$file\e[0m"
+update_message="Updating $formatted_file for local execution"
+revert_message="Reverting changes made to $formatted_file"
+
+make_changes
+
+# https://unix.stackexchange.com/a/313648
+exit_script() {
+  print_message "Terminating prematurely"
+  revert_changes
+  trap - SIGINT SIGTERM # clear the trap
+  kill -- -$$ # Sends SIGTERM to child/sub processes
+}
+
+trap exit_script SIGINT SIGTERM
+
+is_reverted=0
+for line in "$(exec bundle exec "$@")"; do
+  echo "$line"
+  if [[ $line == *"$revert_trigger"* ]]; then
+    revert_changes
+    is_reverted=1
+  fi
+done
+
+if [ "$is_reverted" -ne 1 ]; then
+  revert_changes
+fi

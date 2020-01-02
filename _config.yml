@@ -27,6 +27,7 @@ exclude:
   - yarn.lock
   - server
   - js/development
+  - local
 
 # TODO: Use _data files to store currencies and country-to-currency mappings.
 # TODO: Use assets to compress JS, CSS and HTML.
