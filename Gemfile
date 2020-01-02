@@ -1,7 +1,10 @@
 source "https://rubygems.org"
 
-# gem "jekyll", "~> 4.0.0" #?jekyll
-gem "github-pages", group: :jekyll_plugins #?github-pages
+if (ENV["JEKYLL_ENV"] == 'development')
+  gem "jekyll", "~> 4.0.0"
+else
+  gem "github-pages", group: :jekyll_plugins
+end
 
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
