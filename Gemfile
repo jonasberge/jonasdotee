@@ -1,12 +1,5 @@
 source "https://rubygems.org"
 
-# TODO: Write a script that temporarily comments `gem "jekyll, "~> 4.0.0""`
-#   and uncomments `gem "github-pages", group :jekyll_plugins` when pushing
-#   to GitHub, so that our site will be deployed.
-#   Locally, we use Jekyll version 4.x, as that one is much faster at
-#   rebuilding the site than the version currently used by GitHub Pages.
-#   Also, don't forget to not use any features from version 4.0 (yet).
-
 gem "jekyll", "~> 4.0.0"
 # gem "github-pages", group: :jekyll_plugins
 
