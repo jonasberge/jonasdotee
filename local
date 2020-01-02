@@ -6,7 +6,7 @@ case "$1 $2" in
 esac
 
 if [[ "$1" = "jekyll" && ("$2" = "build" || "$2" = "serve") ]]; then
-  args="--incremental --config \"_config.yml,_config_dev.yml\""
+  args="--incremental --config _config.yml,_config_dev.yml"
 fi
 
-eval $(egrep -v '^#' .env | xargs) exec bundle exec $@ $args
+exec env $(egrep -v '^#' .env | xargs) bundle exec $@ $args
