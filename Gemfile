@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-# gem "jekyll", "~> 4.0.0"
-gem "github-pages", group: :jekyll_plugins
+# gem "jekyll", "~> 4.0.0" #?jekyll
+gem "github-pages", group: :jekyll_plugins #?github-pages
 
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
