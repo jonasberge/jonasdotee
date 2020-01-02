@@ -8,7 +8,7 @@ scripts:
   - "js/main.js"
 ---
 
-<form id="offer-form" method="post" action="{{ site.submit_action }}">
+<form id="offer-form">
   <fieldset>
     <legend>
       <b style="color: #444">jonas.ee</b>&ensp;Make an offer
@@ -26,30 +26,30 @@ scripts:
         <label for="currency">Currency</label>
         <select id="currency" name="currency" required>
           <option value="US Dollar;USD;840">US Dollar (USD)</option>
-					<option value="Euro;EUR;978">Euro (EUR)</option>
-					<option value="Australian Dollar;AUD;036">Australian Dollar (AUD)</option>
-					<option value="Indian Rupee;INR;356">Indian Rupee (INR)</option>
-					<option value="Norwegian Krone;NOK;578">Norwegian Krone (NOK)</option>
-					<option value="Brazilian Real;BRL;986">Brazilian Real (BRL)</option>
-					<option value="Canadian Dollar;CAD;124">Canadian Dollar (CAD)</option>
-					<option value="Yuan Renminbi;CNY;156">Yuan Renminbi (CNY)</option>
-					<option value="New Zealand Dollar;NZD;554">New Zealand Dollar (NZD)</option>
-					<option value="Danish Krone;DKK;208">Danish Krone (DKK)</option>
-					<option value="Pound Sterling;GBP;826">Pound Sterling (GBP)</option>
-					<option value="Hong Kong Dollar;HKD;344">Hong Kong Dollar (HKD)</option>
-					<option value="Yen;JPY;392">Yen (JPY)</option>
-					<option value="Won;KRW;410">Won (KRW)</option>
-					<option value="Rand;ZAR;710">Rand (ZAR)</option>
-					<option value="Swiss Franc;CHF;756">Swiss Franc (CHF)</option>
-					<option value="Malaysian Ringgit;MYR;458">Malaysian Ringgit (MYR)</option>
-					<option value="Mexican Peso;MXN;484">Mexican Peso (MXN)</option>
-					<option value="Zloty;PLN;985">Zloty (PLN)</option>
-					<option value="Russian Ruble;RUB;643">Russian Ruble (RUB)</option>
-					<option value="Singapore Dollar;SGD;702">Singapore Dollar (SGD)</option>
-					<option value="Swedish Krona;SEK;752">Swedish Krona (SEK)</option>
-					<option value="New Taiwan Dollar;TWD;901">New Taiwan Dollar (TWD)</option>
-					<option value="Baht;THB;764">Baht (THB)</option>
-					<option value="Turkish Lira;TRY;949">Turkish Lira (TRY)</option>
+          <option value="Euro;EUR;978">Euro (EUR)</option>
+          <option value="Australian Dollar;AUD;036">Australian Dollar (AUD)</option>
+          <option value="Indian Rupee;INR;356">Indian Rupee (INR)</option>
+          <option value="Norwegian Krone;NOK;578">Norwegian Krone (NOK)</option>
+          <option value="Brazilian Real;BRL;986">Brazilian Real (BRL)</option>
+          <option value="Canadian Dollar;CAD;124">Canadian Dollar (CAD)</option>
+          <option value="Yuan Renminbi;CNY;156">Yuan Renminbi (CNY)</option>
+          <option value="New Zealand Dollar;NZD;554">New Zealand Dollar (NZD)</option>
+          <option value="Danish Krone;DKK;208">Danish Krone (DKK)</option>
+          <option value="Pound Sterling;GBP;826">Pound Sterling (GBP)</option>
+          <option value="Hong Kong Dollar;HKD;344">Hong Kong Dollar (HKD)</option>
+          <option value="Yen;JPY;392">Yen (JPY)</option>
+          <option value="Won;KRW;410">Won (KRW)</option>
+          <option value="Rand;ZAR;710">Rand (ZAR)</option>
+          <option value="Swiss Franc;CHF;756">Swiss Franc (CHF)</option>
+          <option value="Malaysian Ringgit;MYR;458">Malaysian Ringgit (MYR)</option>
+          <option value="Mexican Peso;MXN;484">Mexican Peso (MXN)</option>
+          <option value="Zloty;PLN;985">Zloty (PLN)</option>
+          <option value="Russian Ruble;RUB;643">Russian Ruble (RUB)</option>
+          <option value="Singapore Dollar;SGD;702">Singapore Dollar (SGD)</option>
+          <option value="Swedish Krona;SEK;752">Swedish Krona (SEK)</option>
+          <option value="New Taiwan Dollar;TWD;901">New Taiwan Dollar (TWD)</option>
+          <option value="Baht;THB;764">Baht (THB)</option>
+          <option value="Turkish Lira;TRY;949">Turkish Lira (TRY)</option>
         </select>
       </div>
       <div>
@@ -74,28 +74,43 @@ form.onsubmit = function () {
 
 function submit()
 {
-	const data = new FormData(form);
-	const xhr = new XMLHttpRequest();
-	xhr.open("POST", form.action);
-	xhr.send(data);
+  const url = "http://getsimpleform.com/messages/ajax?form_api_token=7fd25a5a0d95b97004c2d32b0941381e"
 
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState !== XMLHttpRequest.DONE)
-			return;
+  const data = new FormData(form);
+  const serialized = serialize(data);
 
-		if (xhr.status === 200) {
-			console.log(xhr.responseText);
-			return;
-		}
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", url);
+  xhr.send(serialized);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== XMLHttpRequest.DONE)
+      return;
+
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+      return;
+    }
 
     console.log("failed");
-		switch (xhr.status) {
-			case 400: break;
-			default: break;
-		}
+    switch (xhr.status) {
+      case 400: break;
+      default: break;
+    }
   };
 
   return false;
+}
+
+// const serializedData = serialize(data);
+
+function serialize(formData)
+{
+  const result = {};
+  for (const pair of formData.entries())
+    result[pair[0]] = pair[1];
+
+  return result;
 }
 
 </script>
