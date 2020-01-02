@@ -19,12 +19,9 @@ baseurl: /
 
 plugins:
   - jekyll-include-cache
-include:
-  - .htaccess
 exclude:
   - LICENSE.txt
   - CNAME
-  - .htaccess # FIXME: GitHub Pages doesn't support .htaccess files.
   - Gemfile
   - Gemfile.lock
   - node_modules
