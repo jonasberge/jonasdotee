@@ -6,111 +6,143 @@ styles:
   - "css/main.css"
 scripts:
   - "js/main.js"
+  - "https://www.google.com/recaptcha/api.js"
 ---
 
-<form id="offer-form">
+<style>
+
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 2px 30px 2px 2px;
+  border: none;
+}
+
+form {
+  width: 400px;
+  min-width: 10px!important; /* Internet Explorer */
+}
+
+@media screen and (max-width: calc(400px / 0.8)) {
+  form {
+    width: 80%;
+  }
+}
+
+#wrapper {
+  text-align: center;
+}
+#yourdiv {
+  display: inline-block;
+  width:  min(26em, 80%);
+}
+
+</style>
+
+<!--
+<div id="wrapper"><div id="yourdiv">
+
+<div style="position: relative; display: inline-block; padding: 0 30px;">
+  <div style="position: absolute; top: 0; left: 100%;">
+      ELEMENT NEXT TO CENTERED DIV
+      </div>
+  <h2>CENTERED ELEMENT</h2>
+  </div>
+
+</div></div>
+-->
+
+<form style="margin: 0 auto" id="offer-form" method="post" action="{{ site.submit_action }}"
+  class="pure-form pure-form-stacked">
   <fieldset>
     <legend>
       <b style="color: #444">jonas.ee</b>&ensp;Make an offer
     </legend>
-    <div>
-      <div>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-1">
         <label for="_replyto">E-Mail Address</label>
-        <input id="_replyto" name="_replyto" type="text" spellcheck="false" required>
+        <input id="_replyto" name="_replyto" type="email" spellcheck="false" required
+          class="pure-u-1">
       </div>
-      <div>
-        <label for="offer">Amount</label>
-        <input id="offer" name="offer" type="text" spellcheck="false" required>
+      <div class="pure-u-1" style="visibility: hidden; height: 100%"></div>
+      <div class="pure-u-1-2 pure-u-md-1-2">
+        <!-- <label for="offer">Amount</label> -->
+        <input id="offer" name="offer" type="number" step="0.01" spellcheck="false"
+          class="pure-u-7-8 pure-u-md-7-8" placeholder="Amount" required>
       </div>
-      <div>
-        <label for="currency">Currency</label>
-        <select id="currency" name="currency" required>
-          <option value="US Dollar;USD;840">US Dollar (USD)</option>
-          <option value="Euro;EUR;978">Euro (EUR)</option>
-          <option value="Australian Dollar;AUD;036">Australian Dollar (AUD)</option>
-          <option value="Indian Rupee;INR;356">Indian Rupee (INR)</option>
-          <option value="Norwegian Krone;NOK;578">Norwegian Krone (NOK)</option>
-          <option value="Brazilian Real;BRL;986">Brazilian Real (BRL)</option>
-          <option value="Canadian Dollar;CAD;124">Canadian Dollar (CAD)</option>
-          <option value="Yuan Renminbi;CNY;156">Yuan Renminbi (CNY)</option>
-          <option value="New Zealand Dollar;NZD;554">New Zealand Dollar (NZD)</option>
-          <option value="Danish Krone;DKK;208">Danish Krone (DKK)</option>
-          <option value="Pound Sterling;GBP;826">Pound Sterling (GBP)</option>
-          <option value="Hong Kong Dollar;HKD;344">Hong Kong Dollar (HKD)</option>
-          <option value="Yen;JPY;392">Yen (JPY)</option>
-          <option value="Won;KRW;410">Won (KRW)</option>
-          <option value="Rand;ZAR;710">Rand (ZAR)</option>
-          <option value="Swiss Franc;CHF;756">Swiss Franc (CHF)</option>
-          <option value="Malaysian Ringgit;MYR;458">Malaysian Ringgit (MYR)</option>
-          <option value="Mexican Peso;MXN;484">Mexican Peso (MXN)</option>
-          <option value="Zloty;PLN;985">Zloty (PLN)</option>
-          <option value="Russian Ruble;RUB;643">Russian Ruble (RUB)</option>
-          <option value="Singapore Dollar;SGD;702">Singapore Dollar (SGD)</option>
-          <option value="Swedish Krona;SEK;752">Swedish Krona (SEK)</option>
-          <option value="New Taiwan Dollar;TWD;901">New Taiwan Dollar (TWD)</option>
-          <option value="Baht;THB;764">Baht (THB)</option>
-          <option value="Turkish Lira;TRY;949">Turkish Lira (TRY)</option>
+      <div class="pure-u-1-2 pure-u-md-1-2">
+        <!-- <label style="visibility: hidden;" for="currency">Currency</label> -->
+        <select id="currency" name="currency" required class="pure-input-1">
+          {% for currency in site.data.currencies %}
+            <option value="{{ currency.number | escape }}">
+              {{ currency.symbol }} ({{ currency.code | escape }})
+            </option>
+          {% endfor %}
         </select>
       </div>
-      <div>
-        <input id="legal" name="legal" type="checkbox" required>
-        <label for="legal">I have read and agreed to the terms and conditions of this nice website.</label>
-      </div>
-      <div>
-        <input type="submit" value="Submit">
-        <!-- <button onclick="submit">Submit</button> -->
+    </div>
+
+    <div style="text-align: center;">
+      <div style="display: inline-block">
+        <div>TEXT</div>
+        <div style="display: table-row">
+          <!-- <input id="legal" name="legal" type="checkbox" class="table-cell" required> -->
+          <label for="legal" class="table-cell" style="max-width: 1%">
+            I have read and agreed to the terms
+            and conditions of this website.
+          </label>
+        </div>
       </div>
     </div>
+
+    <div>
+      <input type="checkbox" id="recaptcha-checkbox" name="recaptcha-checkbox" tabindex="-1" required
+        style="position: absolute; z-index: -1; opacity: 0; margin-top: 36px; margin-left: 69px">
+      <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_key }}"
+        data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"
+        data-error-callback="recaptchaErrorCallback"></div>
+    </div>
+
+    <!-- TODO: Check if reCaptcha checkbox is checked. -->
+    <input type="submit" value="Submit" class="pure-button pure-button-primary" style="display: block; margin: 0 auto">
+
   </fieldset>
 </form>
 
+<pre id="log-result"></pre>
+
 <script>
 
-const form = document.querySelector('#offer-form');
-
-form.onsubmit = function () {
-  return submit();
-};
-
-function submit()
+function setState(state)
 {
-  const url = "http://getsimpleform.com/messages/ajax?form_api_token=7fd25a5a0d95b97004c2d32b0941381e"
-
-  const data = new FormData(form);
-  const serialized = serialize(data);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", url);
-  xhr.send(serialized);
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState !== XMLHttpRequest.DONE)
-      return;
-
-    if (xhr.status === 200) {
-      console.log(xhr.responseText);
-      return;
-    }
-
-    console.log("failed");
-    switch (xhr.status) {
-      case 400: break;
-      default: break;
-    }
-  };
-
-  return false;
+  const checkbox = document.getElementById('recaptcha-checkbox');
+  checkbox.checked = state;
 }
 
-// const serializedData = serialize(data);
-
-function serialize(formData)
+function recaptchaCallback()
 {
-  const result = {};
-  for (const pair of formData.entries())
-    result[pair[0]] = pair[1];
+  console.log('callback');
+  setState(true);
+}
 
-  return result;
+function recaptchaExpiredCallback()
+{
+  console.log('expired-callback');
+  setState(false);
+}
+
+function recaptchaErrorCallback()
+{
+  console.log('error-callback');
+  setState(false);
 }
 
 </script>
+
+<!-- TODO: when reCaptcha confirmed: check hidden checkbox behind it. -->
+<!-- TODO: when reCaptcha expired: uncheck checkbox. -->
