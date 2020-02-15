@@ -9,7 +9,8 @@ email: jonasdotee@gmail.com
 description: >-
   <description>
 lang: en-US
-submit_action: https://getsimpleform.com/messages?form_api_token=7fd25a5a0d95b97004c2d32b0941381e
+submit_action: https://jonasdotee.000webhostapp.com/submit
+recaptcha_key: 6Le2KswUAAAAAMnCCeIgacnWs70BTtBV3nm6Suxy
 
 # Jekyll configuration
 url: https://jonas.ee
