@@ -5,7 +5,7 @@ package.json
 yarn-error.log
 yarn.lock
 
-# Editor files
+# editor files
 .vscode/
 
 # Jekyll files
