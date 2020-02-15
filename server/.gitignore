@@ -1,9 +1,0 @@
-# Configuration
-config.ini
-
-# Logs
-logs/
-
-# Composer
-vendor/
-composer.lock
