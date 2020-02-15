@@ -13,8 +13,9 @@ RewriteCond %{REQUEST_URI} (.+)/$
 RewriteRule ^ %1 [R,L]
 
 # PHP scripts are only accessible via POST.
-RewriteCond %{REQUEST_METHOD} !POST
-RewriteRule \.php$ - [R=404]
+# RewriteCond %{REQUEST_METHOD} !POST
+# RewriteRule \.php$ - [R=404]
+# TODO
 
 # With POST requests, any route that does not
 # contain a dot is interpreted as a PHP script.
