@@ -1,6 +1,6 @@
 /* -- Global styles. -- */
 
-@import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Varela+Round&display=optional");
 
 html, button, input, select, textarea,
 input:-webkit-autofill::first-line, /* Autocomplete text should have the same font. */
