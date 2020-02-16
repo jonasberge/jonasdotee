@@ -16,3 +16,6 @@ _site/
 Gemfile.lock
 .env
 _config_dev.yml
+
+# temp
+fonts/
