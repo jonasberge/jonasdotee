@@ -27,8 +27,10 @@ libs:
       - https://unpkg.com/purecss@1.0.1/build/forms-min.css
       - https://unpkg.com/purecss@1.0.1/build/buttons-min.css
   pageclip:
-    styles: [ https://s.pageclip.co/v1/pageclip.css ]
-    scripts: [ https://s.pageclip.co/v1/pageclip.js ]
+    styles:
+      - https://s.pageclip.co/v1/pageclip.css
+    scripts:
+      - https://s.pageclip.co/v1/pageclip.js
 
 plugins:
   - jekyll-include-cache
