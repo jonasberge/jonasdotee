@@ -1,0 +1,28 @@
+{% assign assets = [] %}
+
+{% for name in page.libs %}
+  {% assign lib = site.libs[name] %}
+  {% assign current = lib[include.type] %}
+
+  {% if current %}
+    {% if include.type == "scripts" %}
+      <!-- Scripts can be either listed directly under 'scripts' or
+        they can be separated in sections for loading before the </head>
+        tag or before the closing </body> tag. -->
+      {% assign nested = current[include.location] %}
+      {% if nested %}
+        {% assign current = nested %}
+      {% endif %}
+    {% endif %}
+    {% if current %}
+      {% assign assets = assets | concat: current %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% for asset in assets %}
+  {% case include.type %}
+    {% when "styles" %} <link rel="stylesheet" href="{{ asset }}">
+    {% when "scripts" %} <script src="{{ asset }}"></script>
+  {% endcase %}
+{% endfor %}

@@ -1,0 +1,12 @@
+{% assign assets = page[include.type] %}
+
+{% if include.type == "scripts" %}
+  {% assign assets = assets[include.location] %}
+{% endif %}
+
+{% for asset in assets %}
+  {% case include.type %}
+    {% when "styles" %} <link rel="stylesheet" href="{{ asset }}">
+    {% when "scripts" %} <script src="{{ asset }}"></script>
+  {% endcase %}
+{% endfor %}
