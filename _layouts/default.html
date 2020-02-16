@@ -5,32 +5,34 @@
   <meta charset="utf-8">
   <title>{{ page.title }}</title>
 
-  <meta name="description" content="{{ page.description }}">
+  <meta name="description" content="{{ page.description | default: site.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- #1: Default styles, resets and normalization. -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/default.css">
 
-  <!-- TODO: Add integrity. -->
-  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/forms-min.css" crossorigin="anonymous">
-  <link rel="stylesheet" hreF="https://unpkg.com/purecss@1.0.1/build/buttons-min.css" crossorigin="anonymous">
+  <!-- #2: Library stylesheets. -->
+  {% include assets/lib.html type="styles"%}
 
-  <!--[if lte IE 8]>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
-  <!--<![endif]-->
+  <!-- #3: The site's main stylesheet. -->
+  <link rel="stylesheet" href="css/main.css">
 
-  {% for style in page.styles %}
-    <link rel="stylesheet" href="{{ style }}">
-  {% endfor %}
+  {% assign split_char = '.' %}
+  {% assign parts = page.name | split: split_char %}
+  {% assign parts_size = parts | size | minus: 1 %}
+  {% assign name = parts | slice: 0, parts_size | join: split_char %}
+
+  <!-- #4: The stylesheet for this specific page. -->
+  <link rel="stylesheet" href="css/page/{{ name }}.css">
+
+  <!-- #5: Additional stylesheets specified in front matter. -->
+  {% include assets/page.html type="styles" %}
 
   <script>document.documentElement.classList.replace('no-js', 'js')</script>
+
+  {% include assets/lib.html type="scripts" location="head" %}
+  {% include assets/page.html type="scripts" location="head" %}
 
 </head>
 <body>
@@ -43,9 +45,8 @@
     <script src="js/development/live.js"></script>
   {% endif %}
 
-  {% for script in page.scripts %}
-    <script src="{{ script }}"></script>
-  {% endfor %}
+  {% include assets/lib.html type="scripts" location="body" %}
+  {% include assets/page.html type="scripts" location="body" %}
 
 </body>
 </html>
