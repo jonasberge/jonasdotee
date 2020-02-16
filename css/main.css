@@ -1,38 +1,144 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
+/* -- Global styles. -- */
+
+@import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
 
 html, button, input, select, textarea,
-.pure-g [class *= "pure-u"] {
+input:-webkit-autofill::first-line, /* Autocomplete text should have the same font. */
+.pure-g[class*="pure-u"] {
   font-family: 'Varela Round', Arial, sans-serif;
 }
 
-input[type=checkbox] {
-  vertical-align: middle;
-  margin: .5em
+/* Source: https://a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
 }
 
-div.g-recaptcha {
-  width: 304px;
-  height: 78px;
-  margin: 0 auto;
+.fill-height {
+  height: auto;
+  min-height: 100%;
 }
 
-.table-row {
-  display: table-row;
+.no-wrap {
+  white-space: nowrap;
 }
 
-.table-cell,
-.pure-form-stacked label.table-cell {
-  display: table-cell;
+/* Normalize padding for fieldsets and divs.
+ * Set the top and reset the bottom padding. */
+div.segment,
+fieldset.segment {
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
-label[for=legal] {
-  text-align: left;
+/* The first child in a segment doesn't have top padding,
+ * while the last child doesn't have bottom padding */
+div.segment:first-child,
+fieldset.segment:first-child {
+  padding-top: 0;
+}
+div.segment:last-child,
+fieldset.segment:last-child {
+  padding-bottom: 0;
 }
 
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
+/* Container for inline segments */
+div.inline {
+  display: flex;
+  white-space: nowrap;
 }
-select {
+div.inline > input {
+  margin: 0 .5em; /* Proper right and left margin. */
+}
+
+/* Reset abbreviation default styling. */
+abbr[title] {
+  border-bottom: none;
+  text-decoration: none;
+  cursor: help;
+}
+
+/* Separating line that fills the entire horizontal
+ * space and fades towards the left and right ends. */
+.separator {
+  width: auto;
+  height: 1px;
+  margin-left: 2em;
+  margin-right: 2em;
+  background: rgba(0, 0, 0, .1);
+  background: linear-gradient(90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, .1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+
+/* -- Form styles. -- */
+
+select::-ms-expand, /* Hide the down-facing expand arrow */
+input::-ms-clear { /* and the cross to clear the input (IE). */
+  display: none;
+}
+
+/* Disable red outlines for invalid inputs (IE). */
+input:invalid,
+select:invalid {
+  outline: none;
+}
+
+/* Disable the highlighting when selecting an item. */
+select::-ms-value {
   background: transparent;
+  color: inherit;
+}
+
+/* Hide the down-facing arrow. */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Hide the number input spinner. */
+input[type=number] { -moz-appearance: textfield; } /* Firefox */
+input::-webkit-outer-spin-button, /* Firefox, Safari, Edge, Opera */
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Color the placeholder. The default is black. */
+:-ms-input-placeholder { color: #666; } /* IE */
+::-ms-input-placeholder { color: #777; } /* Edge */
+
+input[type=hidden] {
+  display: none;
+}
+
+input { /* Can be any width. */
+  min-width: 0px;
+}
+
+
+/* -- Footer styles. -- */
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#footer > footer {
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  cursor: default;
+  padding: .5em;
 }
