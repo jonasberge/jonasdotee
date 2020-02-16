@@ -1,34 +1,45 @@
-# Repository information
-username: vonas
-repo: https://github.com/vonas/jonasdotee.git
-branch: master
-github: [metadata]
+github:
+  url: https://github.com
+  user: vonas
+  repo: jonasdotee
 
-# Data used in pages
-email: jonasdotee@gmail.com
-description: >-
-  <description>
 lang: en-US
-submit_action: https://jonasdotee.000webhostapp.com/submit
-recaptcha_key: 6Le2KswUAAAAAMnCCeIgacnWs70BTtBV3nm6Suxy
+description: This domain is for sale.
 
-# Jekyll configuration
-url: https://jonas.ee
-baseurl: /
+offer:
+  minimum: 20
+currency:
+  code: USD
+  symbol: $
+  description: US-Dollar (United States Dollar)
+copyright:
+  first_year: 2019
+
+pageclip_url: https://send.pageclip.co
+pageclip_key: iwujBjGhyRPB0WWaPC254mfexvwURcPz
+pageclip_forms:
+  offer: offer
+
+libs:
+  purecss:
+    styles:
+      - https://unpkg.com/purecss@1.0.1/build/base-min.css
+      - https://unpkg.com/purecss@1.0.1/build/forms-min.css
+      - https://unpkg.com/purecss@1.0.1/build/buttons-min.css
+  pageclip:
+    styles: [ https://s.pageclip.co/v1/pageclip.css ]
+    scripts: [ https://s.pageclip.co/v1/pageclip.js ]
 
 plugins:
   - jekyll-include-cache
 exclude:
-  - LICENSE.txt
+  - LICENSE
   - CNAME
   - Gemfile
   - Gemfile.lock
-  - node_modules
-  - package.json
-  - yarn.lock
-  - server
   - js/development
+  - fonts
   - local
 
-# TODO: Use _data files to store currencies and country-to-currency mappings.
+# TODO: Jekyll: suggest exposing include file name or the like in liquid.
 # TODO: Use assets to compress JS, CSS and HTML.
