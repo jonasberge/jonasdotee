@@ -85,6 +85,10 @@ form button[type=submit].pure-button-primary {
   display: block;
 }
 
+form#offer-form input:disabled {
+  background-color: hsl(0, 0%, 98%);
+}
+
 #template-pageclip-form__success__message {
   display: none;
 }
