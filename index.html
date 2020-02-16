@@ -1,148 +1,27 @@
 ---
 layout: default
-title: jonas.ee &ndash; this domain is for sale
-description: This domain is for sale.
-styles:
-  - "css/main.css"
-scripts:
-  - "js/main.js"
-  - "https://www.google.com/recaptcha/api.js"
+title: jonas.ee - This domain is for sale
+libs: [ "purecss", "pageclip" ]
 ---
 
-<style>
+<div id="root" class="fill-height">
+  <div id="main">
 
-select::-ms-expand {
-  display: none;
-}
+    <div class="segment content-container">
+      <header>
+        <h3 class="title"><span class="badge">This Domain is for Sale.</span></h3>
+        <h4 class="comment normalize">Make an offer by entering your contact details</h4>
+      </header>
+    </div>
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 2px 30px 2px 2px;
-  border: none;
-}
+    <div class="separator"></div>
 
-form {
-  width: 400px;
-  min-width: 10px!important; /* Internet Explorer */
-}
+    <div class="segment content-container">
+      {% include forms/offer.html pageclip_form="offer" %}
+    </div>
 
-@media screen and (max-width: calc(400px / 0.8)) {
-  form {
-    width: 80%;
-  }
-}
-
-#wrapper {
-  text-align: center;
-}
-#yourdiv {
-  display: inline-block;
-  width:  min(26em, 80%);
-}
-
-</style>
-
-<!--
-<div id="wrapper"><div id="yourdiv">
-
-<div style="position: relative; display: inline-block; padding: 0 30px;">
-  <div style="position: absolute; top: 0; left: 100%;">
-      ELEMENT NEXT TO CENTERED DIV
-      </div>
-  <h2>CENTERED ELEMENT</h2>
   </div>
 
-</div></div>
--->
+  {% include footer.html %}
 
-<form style="margin: 0 auto" id="offer-form" method="post" action="{{ site.submit_action }}"
-  class="pure-form pure-form-stacked">
-  <fieldset>
-    <legend>
-      <b style="color: #444">jonas.ee</b>&ensp;Make an offer
-    </legend>
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-md-1-1">
-        <label for="_replyto">E-Mail Address</label>
-        <input id="_replyto" name="_replyto" type="email" spellcheck="false" required
-          class="pure-u-1">
-      </div>
-      <div class="pure-u-1" style="visibility: hidden; height: 100%"></div>
-      <div class="pure-u-1-2 pure-u-md-1-2">
-        <!-- <label for="offer">Amount</label> -->
-        <input id="offer" name="offer" type="number" step="0.01" spellcheck="false"
-          class="pure-u-7-8 pure-u-md-7-8" placeholder="Amount" required>
-      </div>
-      <div class="pure-u-1-2 pure-u-md-1-2">
-        <!-- <label style="visibility: hidden;" for="currency">Currency</label> -->
-        <select id="currency" name="currency" required class="pure-input-1">
-          {% for currency in site.data.currencies %}
-            <option value="{{ currency.number | escape }}">
-              {{ currency.symbol }} ({{ currency.code | escape }})
-            </option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    <div style="text-align: center;">
-      <div style="display: inline-block">
-        <div>TEXT</div>
-        <div style="display: table-row">
-          <!-- <input id="legal" name="legal" type="checkbox" class="table-cell" required> -->
-          <label for="legal" class="table-cell" style="max-width: 1%">
-            I have read and agreed to the terms
-            and conditions of this website.
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <input type="checkbox" id="recaptcha-checkbox" name="recaptcha-checkbox" tabindex="-1" required
-        style="position: absolute; z-index: -1; opacity: 0; margin-top: 36px; margin-left: 69px">
-      <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_key }}"
-        data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"
-        data-error-callback="recaptchaErrorCallback"></div>
-    </div>
-
-    <!-- TODO: Check if reCaptcha checkbox is checked. -->
-    <input type="submit" value="Submit" class="pure-button pure-button-primary" style="display: block; margin: 0 auto">
-
-  </fieldset>
-</form>
-
-<pre id="log-result"></pre>
-
-<script>
-
-function setState(state)
-{
-  const checkbox = document.getElementById('recaptcha-checkbox');
-  checkbox.checked = state;
-}
-
-function recaptchaCallback()
-{
-  console.log('callback');
-  setState(true);
-}
-
-function recaptchaExpiredCallback()
-{
-  console.log('expired-callback');
-  setState(false);
-}
-
-function recaptchaErrorCallback()
-{
-  console.log('error-callback');
-  setState(false);
-}
-
-</script>
-
-<!-- TODO: when reCaptcha confirmed: check hidden checkbox behind it. -->
-<!-- TODO: when reCaptcha expired: uncheck checkbox. -->
+</div>
