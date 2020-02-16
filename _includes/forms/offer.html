@@ -1,0 +1,58 @@
+<form action="{{ site.pageclip_url }}/{{ site.pageclip_key }}/{{ include.pageclip_form }}"
+  method="post" id="offer-form" class="pageclip-form pure-form">
+
+  <fieldset class="segment pure-group">
+    <input type="text" name="name" placeholder="Name"
+      class="pure-input-1" spellcheck="false" required></input>
+    <input type="email" name="email" placeholder="E-Mail Address"
+      class="pure-input-1" spellcheck="false" required></input>
+  </fieldset>
+
+  <!-- Put this between elements because otherwise it would be target
+    for the :first-child CSS selector which is not what we intend. -->
+  <input type="hidden" name="subject" value="New Offer for jonas.ee">
+
+  <div class="segment inline">
+    <label for="offer"><span class="visually-hidden">Your </span>Offer</label>
+    <input id="offer" name="offer" type="number" step="0.01" min="{{ site.offer.minimum }}"
+      spellcheck="false" autocomplete="off" placeholder="At least {{ site.currency.symbol }}{{ site.offer.minimum }}" required>
+    <span><abbr title="{{ site.currency.description }}">{{ site.currency.symbol }} ({{ site.currency.code }})</abbr></span>
+  </div>
+
+  <div class="segment">
+    <textarea class="pure-input-1" placeholder="Comment (optional)"></textarea>
+  </div>
+
+  <div class="segment">
+    <button type="submit" class="pageclip-form__submit pure-button pure-button-primary pure-u-5-12">
+      <span>Submit</span>
+    </button>
+  </div>
+
+</form>
+
+<div id="template-pageclip-form__success__message">
+  <div class="pageclip-form__success__message">
+    <i>
+      <span class="no-wrap">Your submission</span>&#32;
+      <span class="no-wrap">was successful.</span>
+    </i>
+  </div>
+</div>
+
+<script>
+
+(function () {
+  const form = document.querySelector('.pageclip-form');
+  const template = document.querySelector('#template-pageclip-form__success__message');
+
+  console.log(template.innerHTML);
+
+  window.addEventListener('load', function () {
+    Pageclip.form(form, {
+      successTemplate: template.innerHTML
+    });
+  });
+})();
+
+</script>
