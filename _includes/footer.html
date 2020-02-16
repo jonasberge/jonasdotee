@@ -1,0 +1,15 @@
+<div id="footer">
+  <div class="separator"></div>
+  <footer>
+    {% assign year = site.time | date: '%Y' | plus: 0 %}
+    {% assign copyright_time = site.copyright.first_year %}
+    {% if copyright_time < year %}
+      {% assign copyright_time = copyright_time | append: '-' | append: year %}
+    {% endif %}
+
+    <span class="no-wrap">jonas.ee © {{ copyright_time }}</span> &ndash;
+    <span class="no-wrap">Hosted with &hearts; on
+    <a href="{{ site.github.url }}/{{ site.github.user }}/{{ site.github.repo }}"
+      rel="external" target="_blank">GitHub</a>!</span>
+  </footer>
+</div>
