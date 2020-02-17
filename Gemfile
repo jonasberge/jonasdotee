@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 if (ENV["JEKYLL_ENV"] == "development")
-  gem "jekyll", "~> 4.0.0"
+  gem "jekyll"
 else
   gem "github-pages", group: :jekyll_plugins
 end
