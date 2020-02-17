@@ -47,3 +47,12 @@ exclude:
   - local
 
 # TODO: Use assets to compress JS, CSS and HTML.
+compress_html:
+  clippings: all
+  comments: [ "<!-- ", " -->" ]
+  endings: all
+  ignore:
+    envs: [ "" ] # TODO: development
+  blanklines: false
+  profile: false
+  startings: [ html, head, body ]
