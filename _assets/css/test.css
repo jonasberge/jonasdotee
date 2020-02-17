@@ -1,0 +1,8 @@
+.class {
+  background: yellow;
+}
+
+#some-id {
+  content: "";
+  color: yellow;
+}
