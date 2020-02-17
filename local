@@ -5,8 +5,18 @@ case "$1 $2" in
   "bundler exec") shift; shift;;
 esac
 
+is_bundle=false
+case "$1" in
+  "bundle") is_bundle=true;;
+  "bundler") is_bundle=true;;
+esac
+
 if [[ "$1" = "jekyll" && ("$2" = "build" || "$2" = "serve") ]]; then
   args="--incremental --config _config.yml,_config_dev.yml"
 fi
 
-exec env $(egrep -v '^#' .env | xargs) bundle exec $@ $args
+if [ "$is_bundle" = false ]; then
+  prefix="bundle exec"
+fi
+
+exec env $(egrep -v '^#' .env | xargs) $prefix $@ $args
