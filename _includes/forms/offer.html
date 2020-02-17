@@ -43,17 +43,25 @@
 
 <script>
 
-(function () {
+window.addEventListener('load', function () {
+  const logContainer = document.querySelector('#error-log-container');
+  const logElement = logContainer.querySelector('#error-log');
+
   const form = document.querySelector('.pageclip-form');
   const template = document.querySelector('#template-pageclip-form__success__message');
 
-  console.log(template.innerHTML);
-
-  window.addEventListener('load', function () {
-    Pageclip.form(form, {
-      successTemplate: template.innerHTML
-    });
+  Pageclip.form(form, {
+    successTemplate: template.innerHTML,
+    onSubmit: function (event) {
+      logContainer.classList.add('hidden');
+    },
+    onResponse: function (error, response) {
+      logContainer.classList.remove('hidden');
+      logElement.innerText = "Oops, something went wrong!";
+      logElement.innerText += " " + error.message + ";";
+      logElement.innerText += " response: " + response;
+    }
   });
-})();
+});
 
 </script>
