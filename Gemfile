@@ -9,8 +9,6 @@ end
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
   gem "jekyll-include-cache"
-  # Don't need any kind of feed yet.
-  # gem "jekyll-feed", "~> 0.6"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
