@@ -40,7 +40,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - js/development
-  - fonts
   - local
 
 # TODO: Jekyll: suggest exposing include file name or the like in liquid.
