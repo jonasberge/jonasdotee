@@ -8,8 +8,8 @@
       class="pure-input-1" spellcheck="false" required></input>
   </fieldset>
 
-  <!-- Put this between elements because otherwise it would be target
-    for the :first-child CSS selector which is not what we intend. -->
+  <!-- Put this between elements because otherwise it would be target for the
+    :first-child or :last-child CSS selector which is not what we intend. -->
   <input type="hidden" name="subject" value="New Offer for jonas.ee">
   <input type="hidden" name="currency" value="{{ site.currency.description }}">
 
