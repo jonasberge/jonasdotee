@@ -1,7 +1,6 @@
 github:
   url: https://github.com
-  user: vonas
-  repo: jonasdotee
+repository: vonas/jonasdotee
 
 lang: en-US
 description: This domain is for sale.
