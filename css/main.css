@@ -19,6 +19,10 @@ input:-webkit-autofill::first-line, /* Autocomplete text should have the same fo
   white-space: nowrap; /* added line */
 }
 
+.hidden {
+  display: none;
+}
+
 .fill-height {
   height: auto;
   min-height: 100%;
