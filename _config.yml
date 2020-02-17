@@ -32,6 +32,9 @@ libs:
     scripts:
       - https://s.pageclip.co/v1/pageclip.js
 
+deferred_scripts:
+  - https://cdn.simpleanalytics.io/hello.js
+
 plugins:
   - jekyll-include-cache
 exclude:

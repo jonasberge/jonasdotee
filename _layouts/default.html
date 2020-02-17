@@ -48,5 +48,9 @@
   {% include assets/lib.html type="scripts" location="body" %}
   {% include assets/page.html type="scripts" location="body" %}
 
+  {% for script in site.deferred_scripts %}
+    <script src="{{ script }}" defer async></script>
+  {% endfor %}
+
 </body>
 </html>
