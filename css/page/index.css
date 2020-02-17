@@ -89,6 +89,11 @@ form#offer-form input:disabled {
   background-color: hsl(0, 0%, 99%);
 }
 
+/* Hack: Shift the loading spinner up a little bit to make it centered. */
+.pageclip-form__submit:after {
+  top: 40%
+}
+
 #template-pageclip-form__success__message {
   display: none;
 }
