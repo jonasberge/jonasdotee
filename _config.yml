@@ -47,5 +47,4 @@ exclude:
   - js/development
   - local
 
-# TODO: Jekyll: suggest exposing include file name or the like in liquid.
 # TODO: Use assets to compress JS, CSS and HTML.
