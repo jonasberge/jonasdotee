@@ -21,7 +21,7 @@ pageclip_forms:
   offer: offer
 
 simpleanalytics:
-  script: https://cdn.simpleanalytics.io/hello.js
+  script: https://sa.jonas.ee/app.js
 
 libs:
   purecss:
