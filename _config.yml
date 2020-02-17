@@ -20,6 +20,9 @@ pageclip_key: iwujBjGhyRPB0WWaPC254mfexvwURcPz
 pageclip_forms:
   offer: offer
 
+simpleanalytics:
+  script: https://cdn.simpleanalytics.io/hello.js
+
 libs:
   purecss:
     styles:
@@ -32,8 +35,7 @@ libs:
     scripts:
       - https://s.pageclip.co/v1/pageclip.js
 
-deferred_scripts:
-  - https://cdn.simpleanalytics.io/hello.js
+deferred_scripts: []
 
 plugins:
   - jekyll-include-cache
