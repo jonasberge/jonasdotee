@@ -38,6 +38,7 @@ deferred_scripts: []
 
 plugins:
   - jekyll-include-cache
+  - jekyll-assets
 exclude:
   - LICENSE
   - CNAME
@@ -56,3 +57,30 @@ compress_html:
   blanklines: false
   profile: false
   startings: [ html, head, body ]
+
+assets:
+  compress:
+    css: true
+    js: true
+  autowrite: true
+  cache: .jekyll-cache/assets
+  cache_type: filesystem
+  prefix: "/assets"
+  digest: false
+  assets:
+    - "*.css"
+    - "*.js"
+  sources:
+    - _assets/css
+    - _assets/images
+    - _assets/fonts
+    - _assets/img
+    - _assets/js
+  features:
+    liquid: false
+    integrity: true
+    automatic_img_size: true
+    automatic_img_alt : true
+  external:
+    uglifier:
+      harmony: true

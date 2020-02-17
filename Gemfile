@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 if (ENV["JEKYLL_ENV"] == "development")
   gem "jekyll"
+  gem "uglifier"
+  gem "sass"
+  # gem "jekyll-minifier", group: :jekyll_plugins
 else
   gem "github-pages", group: :jekyll_plugins
 end
@@ -9,6 +12,7 @@ end
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
   gem "jekyll-include-cache"
+  gem "jekyll-assets", "~> 2"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
