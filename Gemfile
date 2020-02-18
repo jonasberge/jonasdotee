@@ -1,13 +1,7 @@
 source "https://rubygems.org"
 
-if (ENV["JEKYLL_ENV"] == "development")
-  gem "jekyll"
-  gem "uglifier"
-  gem "sass"
-  # gem "jekyll-minifier", group: :jekyll_plugins
-else
-  gem "github-pages", group: :jekyll_plugins
-end
+gem "jekyll"
+gem "uglifier"
 
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
