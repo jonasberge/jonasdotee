@@ -47,10 +47,6 @@ layout: compress
 
   <script src="js/plugins.js"></script>
 
-  {% if jekyll.environment == "development" %}
-    <script src="js/development/live.js" async></script>
-  {% endif %}
-
   {% include assets/lib.html type="scripts" location="body" %}
   {% include assets/page.html type="scripts" location="body" %}
 
