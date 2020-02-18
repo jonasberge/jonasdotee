@@ -1,3 +1,5 @@
+destination: ./build
+
 github:
   url: https://github.com
 repository: vonas/jonasdotee
