@@ -66,7 +66,6 @@ assets:
   cache: .jekyll-cache/assets
   cache_type: filesystem
   prefix: "/assets"
-  digest: false
   assets:
     - "*.css"
     - "*.js"
@@ -79,8 +78,6 @@ assets:
   features:
     liquid: false
     integrity: true
-    automatic_img_size: true
-    automatic_img_alt : true
   external:
     uglifier:
       harmony: true
