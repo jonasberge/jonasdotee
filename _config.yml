@@ -53,7 +53,7 @@ compress_html:
   comments: [ "<!-- ", " -->" ]
   endings: all
   ignore:
-    envs: [ "" ] # TODO: development
+    envs: [ "development" ]
   blanklines: false
   profile: false
   startings: [ html, head, body ]
