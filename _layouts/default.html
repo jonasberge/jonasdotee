@@ -13,16 +13,14 @@ layout: compress
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- #1: Default styles, resets and normalization. -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/default.css">
-
-  {% css test %}
+  {% css normalize %}
+  {% css default %}
 
   <!-- #2: Library stylesheets. -->
   {% include assets/lib.html type="styles"%}
 
   <!-- #3: The site's main stylesheet. -->
-  <link rel="stylesheet" href="css/main.css">
+  {% css main %}
 
   {% assign split_char = '.' %}
   {% assign parts = page.name | split: split_char %}
@@ -30,7 +28,7 @@ layout: compress
   {% assign name = parts | slice: 0, parts_size | join: split_char %}
 
   <!-- #4: The stylesheet for this specific page. -->
-  <link rel="stylesheet" href="css/page/{{ name }}.css">
+  {% css 'page/{{ name }}' %}
 
   <!-- #5: Additional stylesheets specified in front matter. -->
   {% include assets/page.html type="styles" %}
@@ -45,14 +43,12 @@ layout: compress
 
   {{ content }}
 
-  <script src="js/plugins.js"></script>
+  {% js plugins %}
 
   {% include assets/lib.html type="scripts" location="body" %}
   {% include assets/page.html type="scripts" location="body" %}
 
   <script data-skip-dnt="true" src="{{ site.simpleanalytics.script }}" defer async></script>
-
-  {% js test %}
 
 </body>
 </html>
