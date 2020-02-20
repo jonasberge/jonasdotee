@@ -2,7 +2,12 @@ source "https://rubygems.org"
 
 gem "jekyll"
 gem "uglifier"
-gem "therubyrhino"
+
+if (ENV["JEKYLL_ENV"] == 'production')
+  gem "therubyracer"
+else
+  gem "therubyrhino"
+end
 
 group :jekyll_plugins do
   # https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/
