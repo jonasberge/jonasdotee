@@ -3,10 +3,10 @@ source "https://rubygems.org"
 gem "jekyll"
 gem "uglifier"
 
-if (ENV["JEKYLL_ENV"] == 'production')
-  gem "therubyracer"
-else
+if (ENV["JEKYLL_ENV"] == 'development')
   gem "therubyrhino"
+else
+  gem "therubyracer"
 end
 
 group :jekyll_plugins do
